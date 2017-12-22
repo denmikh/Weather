@@ -4,11 +4,23 @@
     <title>Place Autocomplete</title>
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
     <meta charset="utf-8">
+    <!-- jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    
+    <!-- Latest compiled and minified CSS -->
+  	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
     <style>
       /* Always set the map height explicitly to define the size of the div
        * element that contains the map. */
       #map {
-        height: 100%;
+        height: 50%;
       }
       /* Optional: Makes the sample page fill the window. */
       html, body {
@@ -60,9 +72,10 @@
     </style>
   </head>
   <body>
-    <input id="pac-input" class="controls" type="text"
-        placeholder="Enter a location">
+    <input id="pac-input" class="controls" type="text" placeholder="Enter a location">
     <div id="type-selector" class="controls">
+      <input id="butt" type="button" name="type" id="ok" value="Поиск">
+      
       <input type="radio" name="type" id="changetype-all" checked="checked">
       <label for="changetype-all">All</label>
 
@@ -84,11 +97,11 @@
 
       function initMap() {
         var map = new google.maps.Map(document.getElementById('map'), {
-          center: {lat: -33.8688, lng: 151.2195},
+          center: {lat: 47.23571369999999, lng: 39.701505},
           zoom: 13
         });
         var input = /** @type {!HTMLInputElement} */(
-            document.getElementById('pac-input'));
+            document.getElementById('pac-input', 'butt'));
 
         var types = document.getElementById('type-selector');
         map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
@@ -107,9 +120,9 @@
           infowindow.close();
           marker.setVisible(false);
           var place = autocomplete.getPlace();
-          console.log("--- place:", place);
-          console.log("--- place lat:", place.geometry.location.lat());
-          console.log("--- place lng:", place.geometry.location.lng());
+          
+          getweather(place.geometry.location.lat(), place.geometry.location.lng());
+
           if (!place.geometry) {
             // User entered the name of a Place that was not suggested and
             // pressed the Enter key, or the Place Details request failed.
@@ -161,7 +174,79 @@
         setupClickListener('changetype-establishment', ['establishment']);
         setupClickListener('changetype-geocode', ['geocode']);
       }
+
+      var xhr = new XMLHttpRequest(lat, lng));
+
+      xhr.open('GET', 'http://api.openweathermap.org/data/2.5/forecast?lat="+lat+"&lon="+lng+"&APPID=1a48d78a9c81844bb059e91f7ecd119f', true);
+
+      xhr.send();
+
+      xhr.onreadystatechange = function() {
+        if (this.readyState != 4) return;
+
+        // по окончании запроса доступны:
+        // status, statusText
+        // responseText, responseXML (при content-type: text/xml)
+
+        if (this.status != 200) {
+          // обработать ошибку
+          alert( 'ошибка: ' + (this.status ? this.statusText : 'запрос не удался') );
+          return;
+        }
+
+    // получить результат из this.responseText или this.responseXML
+
+
+      function getweather(lat, lng){
+          $.get("http://api.openweathermap.org/data/2.5/forecast?lat="+lat+"&lon="+lng+"&APPID=1a48d78a9c81844bb059e91f7ecd119f", function (data) {
+            // console.log(data)
+            data.list.forEach(function(item) {
+              addItem(item);
+            });
+          });
+          $("#asd").empty();
+        };
+
+        
+        function addtweatherString(weatherItems){
+          var str = "" ;
+          weatherItems.forEach(function(items) {
+            // if(str != ""){
+            //   str = str + ",";
+            // }
+            str = str + items.description;
+             console.log(items);
+          });
+          return str;
+        };
+
+       function addItem(item){
+          // console.log(item);
+          var date = item.dt_txt;
+          var temp = Math.round(item.main.temp - 273);
+          var weather = addtweatherString(item.weather);
+          var dat = "<tr><td>"+date+"</td><td>"+temp+"</td><td>"+weather+"</td><tr>";
+          $("#asd").append(dat);
+       };
+
     </script>
+<div id="tag"></div>
+
+<div class="table-responsive col-md-6">
+	<table class="table table-hover table-bordered table-condensed ">
+		<thead>
+			<tr class="active">
+				<th>Date</th>
+				<th>Temperature (Celsium)</th>
+				<th>Weather condition</th>
+			</tr>
+		</thead>
+		<tbody id="asd">
+
+		</tbody>
+	</table>
+</div>
+
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyByNQ1Eixs1OSCl3h2qNuTN8F8HXppw36A&libraries=places&callback=initMap"
         async defer></script>
   </body>

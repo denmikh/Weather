@@ -174,24 +174,29 @@
         setupClickListener('changetype-establishment', ['establishment']);
         setupClickListener('changetype-geocode', ['geocode']);
       }
+
       function getweather(lat, lng){
         var xhr = new XMLHttpRequest();
         xhr.open('GET', 'http://api.openweathermap.org/data/2.5/forecast?lat='+lat+'&lon='+lng+'&APPID=1a48d78a9c81844bb059e91f7ecd119f', true);
         xhr.send();
-        console.log(xhr)
+        // console.log(xhr)
         xhr.onreadystatechange = function() {
           if (this.readyState != 4) return;
-            xhr.response.forEach(function(item) {
-                 alert(xhr.response);
+            var data = eval("("+xhr.responseText+")");
+            // console.log(data);
+            data.list.forEach(function(item) {
+              addItem(item);
                 });
               };
+              document.getElementById('asd').innerHTML = '';
+              // $("#asd").empty();
+            
             };
-    // получить результат из this.responseText или this.responseXML
-
+    
 
       // function getweather(lat, lng){
       //     $.get("http://api.openweathermap.org/data/2.5/forecast?lat="+lat+"&lon="+lng+"&APPID=1a48d78a9c81844bb059e91f7ecd119f", function (data) {
-      //       // console.log(data)
+      //       console.log(data)
       //       data.list.forEach(function(item) {
       //         addItem(item);
       //       });
@@ -200,26 +205,28 @@
       //   };
 
         
-      //   function addtweatherString(weatherItems){
-      //     var str = "" ;
-      //     weatherItems.forEach(function(items) {
-      //       // if(str != ""){
-      //       //   str = str + ",";
-      //       // }
-      //       str = str + items.description;
-      //        console.log(items);
-      //     });
-      //     return str;
-      //   };
+        function addtweatherString(weatherItems){
+          var str = "" ;
+          weatherItems.forEach(function(items) {
+            // if(str != ""){
+            //   str = str + ",";
+            // }
+            str = str + items.description;
+            //  console.log(items);
+          });
+          return str;
+        };
 
-      //  function addItem(item){
-      //     // console.log(item);
-      //     var date = item.dt_txt;
-      //     var temp = Math.round(item.main.temp - 273);
-      //     var weather = addtweatherString(item.weather);
-      //     var dat = "<tr><td>"+date+"</td><td>"+temp+"</td><td>"+weather+"</td><tr>";
-      //     $("#asd").append(dat);
-      //  };
+       function addItem(item){
+          // console.log(item);
+          var date = item.dt_txt;
+          var temp = Math.round(item.main.temp - 273);
+          var weather = addtweatherString(item.weather);
+          var dat = "<tr><td>"+date+"</td><td>"+temp+"</td><td>"+weather+"</td><tr>";
+          document.getElementById('asd').innerHTML = document.getElementById('asd').innerHTML + dat;
+          
+          // $("#asd").append(dat);
+       };
 
     </script>
 <div id="tag"></div>

@@ -24,21 +24,7 @@
 
   <body>
     <input id="pac-input" class="controls" type="text" placeholder="Enter a location">
-    <div id="type-selector" class="controls">
-      <input id="butt" type="button" name="type" id="ok" value="Поиск">
-      
-      <input type="radio" name="type" id="changetype-all" checked="checked">
-      <label for="changetype-all">All</label>
-
-      <input type="radio" name="type" id="changetype-establishment">
-      <label for="changetype-establishment">Establishments</label>
-
-      <input type="radio" name="type" id="changetype-address">
-      <label for="changetype-address">Addresses</label>
-
-      <input type="radio" name="type" id="changetype-geocode">
-      <label for="changetype-geocode">Geocodes</label>
-    </div>
+    <input id="butt" type="button" name="type" id="ok" value="Поиск">
     <div id="map"></div>
 
     <script>

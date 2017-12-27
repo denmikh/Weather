@@ -23,29 +23,31 @@
   </head>
 
   <body>
-    <input id="pac-input" class="controls" type="text" placeholder="Enter a location">
-    <input id="butt" type="button" name="type" id="ok" value="Поиск">
-    <div id="map"></div>
+    <div id="weather_table">
+      <input id="pac-input" class="controls" type="text" placeholder="Enter a location">
+      <input id="button" type="button" class="btn btn-primary" value="Поиск">
+      <div id="block" class="table-responsive">
+        <table class="table table-hover table-bordered table-condensed ">
+          <thead>
+            <tr id="tableHead">
+              <th>Date</th>
+              <th>Temperature (Celsium)</th>
+              <th>Weather condition</th>
+            </tr>
+          </thead>
+          <tbody id="table">
+          </tbody>
+        </table>
+      </div>
+    </div>
 
     <script>
       initMap();
     </script>
 
-<div id="asd" class="table-responsive col-md-6">
-	<table class="table table-hover table-bordered table-condensed ">
-		<thead>
-			<tr class="active">
-				<th>Date</th>
-				<th>Temperature (Celsium)</th>
-				<th>Weather condition</th>
-			</tr>
-		</thead>
-		<tbody id="table">
-		</tbody>
-	</table>
-</div>
 
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyByNQ1Eixs1OSCl3h2qNuTN8F8HXppw36A&libraries=places&callback=initMap"
-        async defer></script>
+        async defer>
+    </script>
   </body>
 </html>

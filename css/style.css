@@ -1,10 +1,5 @@
-/* Always set the map height explicitly to define the size of the div
-       * element that contains the map. */
-       #map {
-        /* display: none; */
-        height: 0%;
-      }
-      /* Optional: Makes the sample page fill the window. */
+       @import url('https://fonts.googleapis.com/css?family=Roboto+Slab');
+
       html, body {
         height: 100%;
         margin: 0;
@@ -23,35 +18,30 @@
 
       #pac-input {
         background-color: #fff;
-        font-family: Roboto;
+        font-family: 'Roboto Slab', serif;
         font-size: 15px;
         font-weight: 300;
-        margin-left: 12px;
+        margin: 10px;
         padding: 0 11px 0 13px;
         text-overflow: ellipsis;
-        width: 300px;
+        width: 400px;
       }
-
-      #pac-input:focus {
-        border-color: #4d90fe;
+      
+      #weather_table{
+        margin: 10px;
+        /* border: 1px solid #8d4a4a; */
+        width: 500px;
       }
-
-      .pac-container {
-        font-family: Roboto;
+      #block {
+        padding: 3px;
+        width: auto;
+        font-family: 'Roboto Slab', serif;
       }
-
-      #type-selector {
+      #tableHead {
         color: #fff;
-        background-color: #4d90fe;
-        padding: 5px 11px 0px 11px;
+        background-color: #3e72a3;
       }
 
-      #type-selector label {
-        font-family: Roboto;
-        font-size: 13px;
-        font-weight: 300;
-      }
-
-      #asd {
-        padding: 20px;
+      tr:nth-child(1) {
+        background-color: #cdd7e0;
       }

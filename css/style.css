@@ -32,10 +32,9 @@
         width: 500px;
       }
 
-      #table {
-        padding: 3px;
+      #table {     
         font-family: 'Roboto Slab', serif;
-        height: 500px;
+        font-size: 0.97em;
       }
       #tableTr {
         color: #fff;
@@ -45,6 +44,32 @@
       tr:nth-child(1) {
         background-color: #cdd7e0;
       }
-      
 
-  
+      table {
+          width: 500px;
+          height: 500px;
+      }
+
+      thead, tbody, tr, td, th { display: block; }
+
+      tr:after {
+          content: ' ';
+          display: block;
+          clear: both;
+      }
+
+      tbody {
+          height: 400px;
+          overflow-y: auto;
+      }
+
+      thead th {
+        width: 32.333%;
+        float: left;
+      }
+
+      tbody td {
+          width: 33.333%;
+          float: left;
+      }
+

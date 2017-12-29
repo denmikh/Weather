@@ -21,8 +21,8 @@
     <div id="weatherBlock">
       <input id="pac-input" class="controls" type="text" placeholder="Enter a location">
       <input id="button" type="button" class="btn btn-primary" value="Поиск">
-      <div id="table" class="table-responsive">
-        <table class="table table-hover table-bordered table-condensed ">
+      <div id="table" class="table-area">
+        <table class="table table-fixed table-hover table-condensed ">
           <thead>
             <tr id="tableTr">
               <th>Date</th>

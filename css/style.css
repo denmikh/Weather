@@ -27,17 +27,17 @@
         width: 400px;
       }
       
-      #weather_table{
+      #weatherBlock{
         margin: 10px;
-        /* border: 1px solid #8d4a4a; */
         width: 500px;
       }
-      #block {
+
+      #table {
         padding: 3px;
-        width: auto;
         font-family: 'Roboto Slab', serif;
+        height: 500px;
       }
-      #tableHead {
+      #tableTr {
         color: #fff;
         background-color: #3e72a3;
       }
@@ -45,3 +45,6 @@
       tr:nth-child(1) {
         background-color: #cdd7e0;
       }
+      
+
+  
